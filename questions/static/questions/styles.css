@@ -1,0 +1,40 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+    list-style-position: inside;
+}
+
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+ }
+
+
+ /* https://stackoverflow.com/questions/25878450/bootstrap-collapsed-navbar-buggy-open */
+ /* https://stackoverflow.com/questions/18192082/bootstrap-3-navbar-collapse */
+ .navbar-collapse.collapse.in {
+    display: inline-block;
+  }

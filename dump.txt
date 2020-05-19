@@ -1,0 +1,13 @@
+<div>
+    {% if user.is_authenticated %}
+        Signed in as <strong>{{ user.username }}</strong>.
+    {% else %}
+        Not signed in.
+    {% endif %}
+</div>
+
+{% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+    </li>
+{% else %}

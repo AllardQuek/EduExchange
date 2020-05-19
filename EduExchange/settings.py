@@ -76,10 +76,14 @@ WSGI_APPLICATION = 'EduExchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgres',
-        'NAME': os.path.join(BASE_DIR, 'db.postgres'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+# We need this for CUSTOM USER model
+AUTH_USER_MODEL = 'questions.User'
 
 
 # Password validation
