@@ -14,11 +14,27 @@
 
 
  <ol>
-        {% for qn in questions %}
-        <li>{{ qn }}</li>
-            {% if qn.image %}
-            <!-- https://stackoverflow.com/questions/5522611/accessing-image-dimensions-on-an-imagefield-in-a-django-template -->
-            <img src="{{ qn.image.url }}" alt="" width=250>
-            {% endif %}
-        {% endfor %}
-    </ol>
+    {% for qn in questions %}
+    <li>{{ qn }}</li>
+        {% if qn.image %}
+        <!-- https://stackoverflow.com/questions/5522611/accessing-image-dimensions-on-an-imagefield-in-a-django-template -->
+        <img src="{{ qn.image.url }}" alt="" width=250>
+        {% endif %}
+    {% endfor %}
+</ol>
+
+
+
+{% for ans in answers %}
+<div class="col-1">
+    <i class="fas fa-arrow-alt-circle-up fa-2x" color: limegreen;"></i>
+    <i class="fas fa-arrow-alt-circle-down fa-2x" style="color: tomato;"></i>
+</div>
+
+<div class="card border-secondary mb-3">
+    <div class="card-body">
+      <p class="card-text">{{ ans.content }}</p>
+    </div>
+    <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
+</div>
+{% endfor %}

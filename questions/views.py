@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -85,16 +86,17 @@ def submit_qn(request):
     if request.method == "POST":
         form = SubmitQnForm(request.POST, request.FILES or None)
         if form.is_valid():
+            # https://stackoverflow.com/questions/53594745/what-is-the-use-of-cleaned-data-in-django
             # https://stackoverflow.com/questions/46940623/how-to-do-i-automatically-set-the-user-field-to-current-user-in-django-modelform
             qn = form.save(commit=False)
             qn.user = request.user
             qn.save()
 
+    # Even if someone makes a GET request, they will also be taken to index route
     return HttpResponseRedirect(reverse(index))
 
-
+@login_required
 def view_qn(request, qn_id):
-
     qn = Question.objects.get(pk=qn_id)
 
     # Query all answers where question stored has qn_id
@@ -110,9 +112,7 @@ def view_qn(request, qn_id):
         "ansform": ansform,
     })
 
-
 def submit_ans(request, qn_id):
-    print(qn_id)
     if request.method == "POST":
         ansform = SubmitAnsForm(request.POST)
         if ansform.is_valid:

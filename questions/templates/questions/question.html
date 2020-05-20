@@ -15,16 +15,39 @@
 </div>
 
 <br>
+<i class="fas fa-cog fa-3x fa-spin"></i>
+<br><br>
+
 
 <h3> <strong>Answers</strong></h3>
+
+
 {% for ans in answers %}
-<div class="card border-secondary mb-3">
-    <div class="card-body">
-      <p class="card-text">{{ ans.content }}</p>
+
+<div class="container answer-list">
+
+    <div class="row">
+      <div class="col-1">
+            <label for="up-icon" class="icon-label" id="up-label">1000000</label>
+            <i class="fas fa-arrow-alt-circle-up fa-2x" color: limegreen;" id="up-icon"></i>
+
+            <i class="fas fa-arrow-alt-circle-down fa-2x" style="color: tomato;" id="down-icon"></i>
+      </div>
+      <div class="col-11">
+        <div class="card border-secondary mb-3">
+            <div class="card-body">
+              <p class="card-text">{{ ans.content }}</p>
+              <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
+
+            </div>
+        </div>
+      </div>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
-</div>
-{% endfor %}
+  </div>
+  {% endfor %}
+
+  <hr>
+
 
 
 <form action="{% url 'submitans' qn.id %}" method="post">
@@ -36,4 +59,7 @@
     {% endfor %}
     <button type="submit" class="btn btn-primary">Submit Answer</button>
 </form>
+
+
+
 {% endblock %}
