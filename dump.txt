@@ -11,3 +11,14 @@
         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
     </li>
 {% else %}
+
+
+ <ol>
+        {% for qn in questions %}
+        <li>{{ qn }}</li>
+            {% if qn.image %}
+            <!-- https://stackoverflow.com/questions/5522611/accessing-image-dimensions-on-an-imagefield-in-a-django-template -->
+            <img src="{{ qn.image.url }}" alt="" width=250>
+            {% endif %}
+        {% endfor %}
+    </ol>

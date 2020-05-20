@@ -4,13 +4,20 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User
+from .forms import PostQnForm
+from .models import User, Question
 
 
 def index(request):
     # Logged-in users will see all posts listed on home page
     if request.user.is_authenticated:
-        return render(request, "questions/home.html")
+        questions = Question.objects.all()
+        form = PostQnForm()
+        
+        return render(request, "questions/home.html", {
+            "questions": questions,
+            "form": form,
+            })
 
     # Non-existing users will see a description of website
     else:
@@ -64,3 +71,15 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "questions/register.html")
+
+# https://stackoverflow.com/questions/46241383/saving-image-files-in-django-model
+def submit_qn(request):
+    if request.method == "POST":
+        form = PostQnForm(request.POST, request.FILES or None)
+        if form.is_valid():
+            # https://stackoverflow.com/questions/46940623/how-to-do-i-automatically-set-the-user-field-to-current-user-in-django-modelform
+            qn = form.save(commit=False)
+            qn.user = request.user
+            qn.save()
+
+    return HttpResponseRedirect(reverse(index))

@@ -6,5 +6,40 @@ Home
 {% endblock %}
 
 {% block main %}
+    <!-- https://docs.djangoproject.com/en/3.0/topics/forms/ -->
+    <!-- https://stackoverflow.com/questions/33763452/applying-css-styles-to-form-items-in-django -->
+    <form action="{% url 'submitqn' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Post Question</button>
+    </form>
+
+    <hr>
+
     <h2>All Posts</h2>
+
+    {% for qn in questions %}
+
+    <div class="card mb-3">
+        <h3 class="card-header">{{ qn.id }}</h3>
+        <div class="card-body">
+          <h5 class="card-title">{{ qn }}</h5>
+        </div>
+        {% if qn.image %}
+        <img style="height: auto; width: 200px; display: block;" src="{{ qn.image.url }}" alt="Card image">
+        {% endif %}
+    {% endfor %}
+    </div>
+
+
+
+  
+
+    
+
 {% endblock %}
