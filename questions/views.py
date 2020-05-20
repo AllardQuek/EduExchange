@@ -3,19 +3,25 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 from .forms import SubmitQnForm, SubmitAnsForm
 from .models import User, Question, Answer
 
 
+ITEMS_PER_PAGE = 2
+
 def index(request):
     # Logged-in users will see all posts listed on home page
     if request.user.is_authenticated:
         questions = Question.objects.all()
+        paginator = Paginator(questions, ITEMS_PER_PAGE)
+        page_number = request.GET.get('page')
+        page_qns = paginator.get_page(page_number)
         form = SubmitQnForm()
         
         return render(request, "questions/home.html", {
-            "questions": questions,
+            "questions": page_qns,
             "form": form,
             })
 
@@ -115,4 +121,5 @@ def submit_ans(request, qn_id):
         else:
             print("ERROR ERROR ERROR")
 
-    return HttpResponseRedirect(reverse(view_qn, kwargs={'qn_id':qn_id}))
+    # https://stackoverflow.com/questions/13202385/django-reverse-with-arguments-and-keyword-arguments-not-found
+    return HttpResponseRedirect(reverse(view_qn, args=(qn_id,)))
