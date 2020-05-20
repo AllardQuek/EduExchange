@@ -15,6 +15,8 @@ def index(request):
     # Logged-in users will see all posts listed on home page
     if request.user.is_authenticated:
         questions = Question.objects.all()
+
+        # https://docs.djangoproject.com/en/3.0/topics/pagination/
         paginator = Paginator(questions, ITEMS_PER_PAGE)
         page_number = request.GET.get('page')
         page_qns = paginator.get_page(page_number)
