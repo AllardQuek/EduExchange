@@ -1,10 +1,10 @@
 from django.forms import ModelForm, Textarea, TextInput
 
-from .models import Question
+from .models import Question, Answer
 
 
 # https://stackoverflow.com/questions/16417683/django-displaying-charfield-as-textfield-in-forms-error
-class PostQnForm(ModelForm):
+class SubmitQnForm(ModelForm):
     class Meta:
         model = Question
         fields = [
@@ -19,4 +19,14 @@ class PostQnForm(ModelForm):
             'title': TextInput(attrs={'size': 50}), 
             'content': Textarea(attrs={'cols':80, 'rows':10, 'class': 'form-control'}),
             
+        }
+
+class SubmitAnsForm(ModelForm):
+    class Meta:
+        model = Answer
+        fields = [
+            'content',
+        ]
+        widgets = {
+            'content': Textarea(attrs={'cols':70, 'rows':3, 'class': 'form-control'}),
         }

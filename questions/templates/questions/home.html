@@ -16,28 +16,52 @@ Home
             {{ field.label_tag }} {{ field }}
         </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Post Question</button>
+        <button type="submit" class="btn btn-primary">Submit Question</button>
     </form>
 
-    <hr>
+    <hr><br>
 
-    <h2>All Posts</h2>
+    <h2><strong>All Posts</strong></h2>
 
     {% for qn in questions %}
-
     <div class="card mb-3">
-        <h3 class="card-header">{{ qn.id }}</h3>
+        <h3 class="card-header"><a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a></h3>
         <div class="card-body">
-          <h5 class="card-title">{{ qn }}</h5>
+          <h5 class="card-title">{{ qn.content }}</h5>
+          <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }}</h6>
         </div>
         {% if qn.image %}
-        <img style="height: auto; width: 200px; display: block;" src="{{ qn.image.url }}" alt="Card image">
+        <img style="height: auto; width: 500px; display: block; text-align: center; margin: auto;" src="{{ qn.image.url }}" alt="Card image">
         {% endif %}
-    {% endfor %}
     </div>
+    {% endfor %}
 
-
-
+    <!-- https://getbootstrap.com/docs/4.4/components/pagination/#alignment -->
+    <div class="pagination justify-content-center">
+        <ul class="pagination pagination-sm">
+          <li class="page-item disabled">
+            <a class="page-link" href="#">&laquo;</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">5</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">&raquo;</a>
+          </li>
+        </ul>
+      </div>
   
 
     

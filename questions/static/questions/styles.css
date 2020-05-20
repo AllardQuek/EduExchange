@@ -33,8 +33,14 @@ footer {
  }
 
 
- /* https://stackoverflow.com/questions/25878450/bootstrap-collapsed-navbar-buggy-open */
- /* https://stackoverflow.com/questions/18192082/bootstrap-3-navbar-collapse */
- .navbar-collapse.collapse.in {
+/* https://stackoverflow.com/questions/25878450/bootstrap-collapsed-navbar-buggy-open */
+/* https://stackoverflow.com/questions/18192082/bootstrap-3-navbar-collapse */
+.navbar-collapse.collapse.in {
+display: inline-block;
+}
+
+/* https://stackoverflow.com/questions/5196583/target-elements-with-multiple-classes-within-one-rule */
+.card.border-secondary.mb-3 {
+    width: 80%;
     display: inline-block;
-  }
+}

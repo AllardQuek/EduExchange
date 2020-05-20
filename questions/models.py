@@ -41,3 +41,6 @@ class Answer(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user} answered: {self.content}"

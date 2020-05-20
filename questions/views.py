@@ -4,15 +4,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .forms import PostQnForm
-from .models import User, Question
+from .forms import SubmitQnForm, SubmitAnsForm
+from .models import User, Question, Answer
 
 
 def index(request):
     # Logged-in users will see all posts listed on home page
     if request.user.is_authenticated:
         questions = Question.objects.all()
-        form = PostQnForm()
+        form = SubmitQnForm()
         
         return render(request, "questions/home.html", {
             "questions": questions,
@@ -75,7 +75,7 @@ def register(request):
 # https://stackoverflow.com/questions/46241383/saving-image-files-in-django-model
 def submit_qn(request):
     if request.method == "POST":
-        form = PostQnForm(request.POST, request.FILES or None)
+        form = SubmitQnForm(request.POST, request.FILES or None)
         if form.is_valid():
             # https://stackoverflow.com/questions/46940623/how-to-do-i-automatically-set-the-user-field-to-current-user-in-django-modelform
             qn = form.save(commit=False)
@@ -83,3 +83,26 @@ def submit_qn(request):
             qn.save()
 
     return HttpResponseRedirect(reverse(index))
+
+
+def view_qn(request, qn_id):
+
+    qn = Question.objects.get(pk=qn_id)
+
+    # Query all answers where question stored has qn_id
+    # https://docs.djangoproject.com/en/3.0/topics/db/queries/#filters-can-reference-fields-on-the-model
+    # https://stackoverflow.com/questions/1981524/django-filtering-on-foreign-key-properties
+    answers = Answer.objects.filter(question__id=qn_id)
+
+    ansform = SubmitAnsForm()
+
+    return render(request, "questions/question.html", {
+        "qn": qn,
+        "answers": answers,
+        "ansform": ansform
+    })
+
+
+def submit_ans(request):
+    pass
+    return HttpResponseRedirect(reverse(view_qn))
