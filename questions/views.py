@@ -99,10 +99,20 @@ def view_qn(request, qn_id):
     return render(request, "questions/question.html", {
         "qn": qn,
         "answers": answers,
-        "ansform": ansform
+        "ansform": ansform,
     })
 
 
-def submit_ans(request):
-    pass
-    return HttpResponseRedirect(reverse(view_qn))
+def submit_ans(request, qn_id):
+    print(qn_id)
+    if request.method == "POST":
+        ansform = SubmitAnsForm(request.POST)
+        if ansform.is_valid:
+            ans = ansform.save(commit=False)
+            ans.user = request.user
+            ans.question = Question.objects.get(pk=qn_id)
+            ans.save()
+        else:
+            print("ERROR ERROR ERROR")
+
+    return HttpResponseRedirect(reverse(view_qn, kwargs={'qn_id':qn_id}))

@@ -7,27 +7,27 @@
     <h3 class="card-header"><a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a></h3>
     <div class="card-body">
       <h5 class="card-title">{{ qn.content }}</h5>
-      <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }}</h6>
+      <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
     </div>
     {% if qn.image %}
     <img style="height: auto; width: 500px; display: block; text-align: center; margin: auto;" src="{{ qn.image.url }}" alt="Card image">
     {% endif %}
 </div>
 
+<br>
 
-<h3>Answers</h3>
-
+<h3> <strong>Answers</strong></h3>
 {% for ans in answers %}
 <div class="card border-secondary mb-3">
     <div class="card-body">
       <p class="card-text">{{ ans.content }}</p>
     </div>
-    <h6 class="card-subtitle mb-2 text-muted">{{ ans.user }}</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
 </div>
 {% endfor %}
 
 
-<form action="" method="post">
+<form action="{% url 'submitans' qn.id %}" method="post">
     {% csrf_token %}
     {% for field in ansform %}
     <div class="form-group">

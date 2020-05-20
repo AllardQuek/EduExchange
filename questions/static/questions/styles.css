@@ -39,6 +39,7 @@ footer {
 display: inline-block;
 }
 
+/* https://www.freecodecamp.org/news/how-to-center-things-with-style-in-css-dc87b7542689/ */
 /* https://stackoverflow.com/questions/5196583/target-elements-with-multiple-classes-within-one-rule */
 .card.border-secondary.mb-3 {
     width: 80%;

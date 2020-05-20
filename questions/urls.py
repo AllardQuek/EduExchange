@@ -9,5 +9,6 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
     path("submit", views.submit_qn, name="submitqn"),
-    path("question/<int:qn_id>", views.view_qn, name="viewqn")
+    path("question/<int:qn_id>", views.view_qn, name="viewqn"),
+    path("submitans/<int:qn_id>", views.submit_ans, name="submitans"),
 ]
