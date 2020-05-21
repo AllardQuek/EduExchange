@@ -11,5 +11,6 @@ urlpatterns = [
     path("submitqn", views.submit_qn, name="submitqn"),
     path("question/<int:qn_id>", views.view_qn, name="viewqn"),
     path("submitans/<int:qn_id>", views.submit_ans, name="submitans"),
-    path("vote/<int:ans_id>/<str:vote>", views.vote_ans, name="voteans")
+    path("vote/<int:ans_id>/<str:vote>", views.vote_ans, name="voteans"),
+    path("save/<int:qn_id>", views.save_qn, name="saveqn"),
 ]

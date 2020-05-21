@@ -7,16 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
             submitVote(icon);
         }
     })
-
-    saveIcons = document.querySelectorAll('.fa-bookmark');
-    console.log(saveIcons);
-    saveIcons.forEach(icon => {
-        icon.onclick = () => {
-            console.log("SAVE!");
-            console.log(icon.dataset.qnid);
-            // saveQn(icon);
-        }
-    })
 })
 
 

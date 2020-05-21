@@ -2,9 +2,9 @@
     <h3 class="card-header">
         <a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a>
         {% if request.user in qn.saved_by.all %}
-        <i class="fas fa-bookmark" data-qnid="{{ qn.id }}"></i>
+        <i class="fas fa-bookmark" data-qnid="{{ qn.id }}" id="qn-{{ qn.id }}"></i>
         {% else %}
-        <i class="far fa-bookmark" data-qnid="{{ qn.id }}"></i>
+        <i class="far fa-bookmark" data-qnid="{{ qn.id }}" id="qn-{{ qn.id }}"></i>
         {% endif %}
     </h3>
     <div class="card-body">

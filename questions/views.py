@@ -170,3 +170,15 @@ def vote_ans(request, ans_id, vote):
     # Get new count, return it and update html
     num_votes = ans.upvoted_by.count() - ans.downvoted_by.count()
     return HttpResponse(f"{num_votes}")
+
+def save_qn(request, qn_id):
+    qn = Question.objects.get(pk=qn_id)
+
+    # Unsave if question is already saved
+    if request.user in qn.saved_by.all():
+        qn.saved_by.remove(request.user)
+        return HttpResponse("Unsaved")
+    else:
+        qn.saved_by.add(request.user)
+        return HttpResponse("Saved")
+    
