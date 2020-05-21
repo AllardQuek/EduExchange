@@ -13,7 +13,7 @@ urlpatterns = [
     path("submitans/<int:qn_id>", views.submit_ans, name="submitans"),
     path("vote/<int:ans_id>/<str:vote>", views.vote_ans, name="voteans"),
     path("save/<int:qn_id>", views.save_qn, name="saveqn"),
-    path("savedqns", views.view_savedqns, name="viewsavedqns"),
+    path("saved", views.view_savedqns, name="viewsavedqns"),
     path("user/<str:username>", views.view_profile, name="viewprofile"),
     path("search", views.search, name="search"),
 ]

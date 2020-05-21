@@ -1,5 +1,9 @@
 {% extends "questions/layout.html" %}
 
+{% block title %}
+    Register
+{% endblock %}
+
 {% block main %}
 
     <h2>Register</h2>
@@ -20,9 +24,9 @@
         <div class="form-group">
             <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
+        <input class="btn btn-secondary" type="submit" value="Register">
     </form>
-
+    <hr>
     Already have an account? <a href="{% url 'login' %}">Log In here.</a>
 
 {% endblock %}

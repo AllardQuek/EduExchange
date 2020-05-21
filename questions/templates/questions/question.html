@@ -3,6 +3,10 @@
 {% load static %}
 {% load mathfilters %}
 
+{% block title %}
+    Question {{ qn.id }}
+{% endblock %}
+
 {% block main %}
     {% include 'common/question.html' %}
 
@@ -55,8 +59,7 @@
     <hr>
 
     {% include 'common/pagination.html' with page_obj=page_answers %}
-
-
+    
 {% endblock %}
 
 {% block script %}

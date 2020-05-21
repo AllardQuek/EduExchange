@@ -1,5 +1,9 @@
 {% extends 'questions/layout.html' %}
 
+{% block title %}
+    Search
+{% endblock %}
+
 {% block main %}
     <form method="GET">
         {{ qn_filter.form.as_p }}

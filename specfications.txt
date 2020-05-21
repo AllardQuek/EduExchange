@@ -26,8 +26,10 @@ Project Scope:
 
 
 Future Work:
+- Work on design and content of first landing page
 - Split into multiple apps? How to decide?
 - How to remember if user voted and show on icons UI? (similar to saving question)
+- Write Tests
 
   Edit Post
 - Users should be able to click an “Edit” button or link on any of their posts
@@ -35,6 +37,7 @@ Future Work:
 - User should be able to “Save” the edited post. Using JS, you should be able to achieve this without reloading the page
 - For security, ensure your application is designed such that it is not possible for a user, via any route, to edit another user’s posts
 - Filter particular post, instantiate form with that post, save form data
+
   Profile Page
 - description (editable)
 - link to user’s saved posts

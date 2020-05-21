@@ -1,7 +1,7 @@
 {% extends "questions/layout.html" %}
 
 {% block title %}
-EduExchange
+    Login
 {% endblock %}
 
 {% block main %}
@@ -17,9 +17,9 @@ EduExchange
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Login">
+        <input class="btn btn-secondary" type="submit" value="Login">
     </form>
-    
+    <hr>
     Don't have an account? <a href="{% url 'register' %}">Register here.</a>
     
 {% endblock %}

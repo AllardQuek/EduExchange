@@ -207,7 +207,7 @@ def search(request):
     qn_filter = QuestionFilter(request.GET, queryset=questions)
 
     # If user inputted any queries set questions to filter results, else empty list
-    questions = qn_filter.qs if bool(request.GET) else []
+    questions = qn_filter.qs if bool(request.GET) else Question.objects.none()
 
     # Order by step is required by Paginator so we order most recent questions first
     questions = questions.order_by('-datetime_created')
