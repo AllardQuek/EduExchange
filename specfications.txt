@@ -1,1 +1,2 @@
 Future Work:
+- How to remember if user voted and show on icons UI? Return an alert response? Return an error message response?

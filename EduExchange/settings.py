@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mathfilters',  # For doing subtraction easily
     'questions',
     'django.contrib.admin',
     'django.contrib.auth',

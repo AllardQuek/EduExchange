@@ -109,7 +109,6 @@ def view_qn(request, qn_id):
     ans_paginator = Paginator(answers, ITEMS_PER_PAGE)
     ans_page_number = request.GET.get('page')
     page_answers = ans_paginator.get_page(ans_page_number)
-    print(page_answers)
 
     ansform = SubmitAnsForm()
 
@@ -134,3 +133,40 @@ def submit_ans(request, qn_id):
 
     # https://stackoverflow.com/questions/13202385/django-reverse-with-arguments-and-keyword-arguments-not-found
     return HttpResponseRedirect(reverse(view_qn, args=(qn_id,)))
+
+def vote_ans(request, ans_id, vote):
+    # Query for answer using ans_id
+    ans = Answer.objects.get(pk=ans_id)
+    # Add current User to voted_by field
+    
+    # Considered: https://stackoverflow.com/questions/2690521/django-check-for-any-exists-for-a-query
+    # We need the .all() method: https://stackoverflow.com/questions/17732449/manyrelatedmanager-not-iterable-think-im-trying-to-pull-my-objects-out-incorre
+    upvoted = True if request.user in ans.upvoted_by.all() else False
+    downvoted = True if request.user in ans.downvoted_by.all() else False
+    if vote == "upvote":
+        # https://stackoverflow.com/questions/6333068/django-removing-object-from-manytomany-relationship
+        if upvoted:
+            # Undo user's upvote
+            ans.upvoted_by.remove(request.user) 
+        elif downvoted:
+            # Remove user from downvoted_by
+            ans.downvoted_by.remove(request.user)
+            ans.upvoted_by.add(request.user)
+        else:
+            # If user hasn't voted at all, add user
+            ans.upvoted_by.add(request.user)
+    elif vote == "downvote":
+        if upvoted:
+            # Remove user from upvoted_by
+            ans.upvoted_by.remove(request.user)
+            ans.downvoted_by.add(request.user)
+        elif downvoted:
+            # Undo user's downvote
+            ans.downvoted_by.remove(request.user)
+        else:
+            # If user hasn't voted at all, add user
+            ans.downvoted_by.add(request.user)
+
+    # Get new count, return it and update html
+    num_votes = ans.upvoted_by.count() - ans.downvoted_by.count()
+    return HttpResponse(f"{num_votes}")

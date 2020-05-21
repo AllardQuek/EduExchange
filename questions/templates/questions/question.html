@@ -1,6 +1,7 @@
 {% extends "questions/layout.html" %}
 
 {% load static %}
+{% load mathfilters %}
 
 {% block main %}
 
@@ -30,11 +31,12 @@
     <div class="row">
         <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
         <div class="col-xs-6 col-lg-1 num-votes">
-            <label for="up-icon" class="icon-label" id="up-label">100000000</label>
+            <!-- https://stackoverflow.com/questions/9948095/variable-subtraction-in-django-templates/51468222#51468222 -->
+            <label for="up-icon" class="icon-label" id="ans-{{ ans.id }}" data-ansid="{{ ans.id }}">{{ ans.upvoted_by.count|sub:ans.downvoted_by.count }}</label>
         </div>  
         <div class="col-xs-6 col-lg-1 votes">
-            <i class="fas fa-arrow-alt-circle-up fa-2x" color: limegreen;" id="up-icon"></i>
-            <i class="fas fa-arrow-alt-circle-down fa-2x" style="color: tomato;" id="down-icon"></i>
+            <i class="fas fa-arrow-alt-circle-up fa-2x vote-icon" color: limegreen;" id="up-icon" data-ansid="{{ ans.id }}" data-vote="upvote"></i>
+            <i class="fas fa-arrow-alt-circle-down fa-2x vote-icon" style="color: tomato;" id="down-icon" data-ansid="{{ ans.id }}" data-vote="downvote"></i>
         </div>
         <div class="col-xs-12 col-lg-10">
         <div class="card border-secondary mb-3">

@@ -39,8 +39,10 @@ class Answer(models.Model):
     content = models.TextField()    # Trying out TextField instead of CharField
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userans")
     datetime_created = models.DateTimeField(auto_now_add=True)
-    upvotes = models.PositiveIntegerField(default=0)
-    downvotes = models.PositiveIntegerField(default=0)
+    upvoted_by = models.ManyToManyField(User, blank=True, related_name="upvotedans")
+    downvoted_by = models.ManyToManyField(User, blank=True, related_name="downvotedans")
+    # upvotes = models.PositiveIntegerField(default=0)
+    # downvotes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.user} answered: {self.content}"
