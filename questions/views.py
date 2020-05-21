@@ -10,8 +10,8 @@ from django.core.paginator import Paginator
 from .forms import SubmitQnForm, SubmitAnsForm
 from .models import User, Question, Answer
 
-
-ITEMS_PER_PAGE = 2
+# Set to lower number for development purposes
+ITEMS_PER_PAGE = 3
 
 def index(request):
     # Logged-in users will see all posts listed on home page
@@ -189,4 +189,12 @@ def view_savedqns(request):
         
     return render(request, "questions/saved_qns.html", {
         "saved_qns": saved_qns
+    })
+
+
+def view_profile(request, username):
+
+    user = User.objects.get(username=username)
+    return render(request, "users/profile.html", {
+        "user": user
     })

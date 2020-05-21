@@ -31,7 +31,7 @@
             <div class="card border-secondary mb-3">
                 <div class="card-body">
                     <p class="card-text">{{ ans.content }}</p>
-                    <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Answered by: <a href="{% url 'viewprofile' ans.user.username %}">{{ ans.user }}</a> ({{ ans.datetime_created }})</h6>
 
                 </div>
             </div>

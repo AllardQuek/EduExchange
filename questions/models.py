@@ -41,8 +41,6 @@ class Answer(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     upvoted_by = models.ManyToManyField(User, blank=True, related_name="upvotedans")
     downvoted_by = models.ManyToManyField(User, blank=True, related_name="downvotedans")
-    # upvotes = models.PositiveIntegerField(default=0)
-    # downvotes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.user} answered: {self.content}"

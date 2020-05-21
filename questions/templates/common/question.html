@@ -9,7 +9,7 @@
     </h3>
     <div class="card-body">
       <h5 class="card-title">{{ qn.content }}</h5>
-      <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
+      <h6 class="card-subtitle text-muted">Asked by: <a href="{% url 'viewprofile' qn.user.username %}">{{ qn.user }}</a> ({{ qn.datetime_created }})</h6>
     </div>
     {% if qn.image %}
     <img class="img-responsive " src="{{ qn.image.url }}" alt="Card image">
