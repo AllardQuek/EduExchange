@@ -1,0 +1,17 @@
+<div class="card mb-3">
+    <h3 class="card-header">
+        <a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a>
+        {% if request.user in qn.saved_by.all %}
+        <i class="fas fa-bookmark" data-qnid="{{ qn.id }}"></i>
+        {% else %}
+        <i class="far fa-bookmark" data-qnid="{{ qn.id }}"></i>
+        {% endif %}
+    </h3>
+    <div class="card-body">
+      <h5 class="card-title">{{ qn.content }}</h5>
+      <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
+    </div>
+    {% if qn.image %}
+    <img class="img-responsive " src="{{ qn.image.url }}" alt="Card image">
+    {% endif %}
+</div>

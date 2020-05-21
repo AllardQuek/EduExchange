@@ -5,16 +5,7 @@
 
 {% block main %}
 
-<div class="card mb-3">
-    <h3 class="card-header"><a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a></h3>
-    <div class="card-body">
-      <h5 class="card-title">{{ qn.content }}</h5>
-      <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
-    </div>
-    {% if qn.image %}
-    <img class="img-responsive col-xs-6" src="{{ qn.image.url }}" alt="Card image">
-    {% endif %}
-</div>
+{% include 'common/question.html' %}
 
 <br>
 <i class="fas fa-cog fa-3x fa-spin"></i>
@@ -35,8 +26,8 @@
             <label for="up-icon" class="icon-label" id="ans-{{ ans.id }}" data-ansid="{{ ans.id }}">{{ ans.upvoted_by.count|sub:ans.downvoted_by.count }}</label>
         </div>  
         <div class="col-xs-6 col-lg-1 votes">
-            <i class="fas fa-arrow-alt-circle-up fa-2x vote-icon" color: limegreen;" id="up-icon" data-ansid="{{ ans.id }}" data-vote="upvote"></i>
-            <i class="fas fa-arrow-alt-circle-down fa-2x vote-icon" style="color: tomato;" id="down-icon" data-ansid="{{ ans.id }}" data-vote="downvote"></i>
+            <i class="fas fa-arrow-alt-circle-up fa-2x vote-icon" id="up-icon" data-ansid="{{ ans.id }}" data-vote="upvote"></i>
+            <i class="fas fa-arrow-alt-circle-down fa-2x vote-icon" id="down-icon" data-ansid="{{ ans.id }}" data-vote="downvote"></i>
         </div>
         <div class="col-xs-12 col-lg-10">
         <div class="card border-secondary mb-3">
@@ -67,6 +58,6 @@
 
 {% include 'common/pagination.html' with page_obj=page_answers %}
 
-<script src="{% static 'questions/question.js' %}"></script>
-
+<script src="{% static 'questions/vote.js' %}"></script>
+<script src="{% static 'quetions/bookmark.js' %}"></script>
 {% endblock %}

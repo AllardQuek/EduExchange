@@ -1,5 +1,6 @@
 {% extends "questions/layout.html" %}
 
+{% load static %}
 
 {% block title %}
 Home
@@ -29,20 +30,13 @@ Home
     <h2><strong>All Posts</strong></h2>
 
     {% for qn in questions %}
-    <div class="card mb-3">
-        <h3 class="card-header"><a href="{% url 'viewqn' qn.id %}">{{ qn.title }}</a></h3>
-        <div class="card-body">
-          <h5 class="card-title">{{ qn.content }}</h5>
-          <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
-        </div>
-        {% if qn.image %}
-        <img class="img-responsive " src="{{ qn.image.url }}" alt="Card image">
-        {% endif %}
-    </div>
+        {% include 'common/question.html' %}
     {% endfor %}
 
     <!-- https://getbootstrap.com/docs/4.4/components/pagination/#alignment -->
     <!-- https://stackoverflow.com/questions/42795717/how-to-avoid-repetition-on-templates-in-django -->
     {% include 'common/pagination.html' with page_obj=questions %}
-    
+
+
+    <script src="{% static 'questions/bookmark.js' %}"></script>
 {% endblock %}

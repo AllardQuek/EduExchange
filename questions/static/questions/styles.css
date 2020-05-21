@@ -104,3 +104,7 @@ display: inline-block;
     display: block;
     margin: auto;         /* NEED for positioning */
 }
+
+.fa-bookmark {
+    float: right;
+}
