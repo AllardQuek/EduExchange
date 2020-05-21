@@ -16,7 +16,8 @@ ITEMS_PER_PAGE = 2
 def index(request):
     # Logged-in users will see all posts listed on home page
     if request.user.is_authenticated:
-        questions = Question.objects.all()
+        # Paginator requires QuerySets to be ordred, and anyway we want most recent questions to appear first
+        questions = Question.objects.all().order_by('-datetime_created')
 
         # https://docs.djangoproject.com/en/3.0/topics/pagination/
         paginator = Paginator(questions, ITEMS_PER_PAGE)
@@ -103,13 +104,18 @@ def view_qn(request, qn_id):
     # Query all answers where question stored has qn_id
     # https://docs.djangoproject.com/en/3.0/topics/db/queries/#filters-can-reference-fields-on-the-model
     # https://stackoverflow.com/questions/1981524/django-filtering-on-foreign-key-properties
-    answers = Answer.objects.filter(question__id=qn_id)
+    answers = Answer.objects.filter(question__id=qn_id).order_by('-datetime_created')
+
+    ans_paginator = Paginator(answers, ITEMS_PER_PAGE)
+    ans_page_number = request.GET.get('page')
+    page_answers = ans_paginator.get_page(ans_page_number)
+    print(page_answers)
 
     ansform = SubmitAnsForm()
 
     return render(request, "questions/question.html", {
         "qn": qn,
-        "answers": answers,
+        "page_answers": page_answers,
         "ansform": ansform,
     })
 

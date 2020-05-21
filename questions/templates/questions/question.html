@@ -24,34 +24,32 @@
 
 {% include 'common/message.html' %}
 
-{% for ans in answers %}
+{% for ans in page_answers %}
 <div class="container answer-list">
 
     <div class="row">
-      <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
-      <div class="col-xs-6 col-lg-1 num-votes">
+        <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
+        <div class="col-xs-6 col-lg-1 num-votes">
             <label for="up-icon" class="icon-label" id="up-label">100000000</label>
-      </div>  
-      <div class="col-xs-6 col-lg-1 votes">
+        </div>  
+        <div class="col-xs-6 col-lg-1 votes">
             <i class="fas fa-arrow-alt-circle-up fa-2x" color: limegreen;" id="up-icon"></i>
             <i class="fas fa-arrow-alt-circle-down fa-2x" style="color: tomato;" id="down-icon"></i>
-      </div>
-      <div class="col-xs-12 col-lg-10">
+        </div>
+        <div class="col-xs-12 col-lg-10">
         <div class="card border-secondary mb-3">
             <div class="card-body">
-              <p class="card-text">{{ ans.content }}</p>
-              <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
+                <p class="card-text">{{ ans.content }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
 
             </div>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
-  {% endfor %}
+    </div>
+{% endfor %}
 
-  <hr>
-
-
+<hr>
 
 <form action="{% url 'submitans' qn.id %}" method="post">
     {% csrf_token %}
@@ -62,6 +60,51 @@
     {% endfor %}
     <button type="submit" class="btn btn-primary">Submit Answer</button>
 </form>
+
+<hr>
+
+<div class="pagination justify-content-center">
+    <ul class="pagination pagination-sm">
+      <!-- Handle previous pages -->
+      {% if page_answers.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1">&laquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="?page=1">&laquo;</a>
+      </li>
+      {% endif %}
+
+      {% if page_answers.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_answers.previous_page_number }}">{{ page_answers.previous_page_number }}</a>
+      </li>
+      {% endif %}
+
+      <!-- Current page -->
+      <li class="page-item active">
+        <a class="page-link" href="?page={{ page_answers.number }}">{{ page_answers.number }}</a>
+      </li>
+
+      <!-- Handle next pages -->
+      {% if page_answers.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_answers.next_page_number }}">{{ page_answers.next_page_number }}</a>
+      </li>
+      {% endif %}
+
+      {% if page_answers.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_answers.paginator.num_pages }}">&raquo;</a>
+      </li>
+      {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="?page={{ page_answers.paginator.num_pages }}">&raquo;</a>
+      </li> 
+      {% endif %}
+    </ul>
+  </div>
 
 <script src="{% static 'questions/question.js' %}"></script>
 
