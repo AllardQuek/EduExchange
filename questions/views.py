@@ -7,8 +7,9 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.core.paginator import Paginator
 
-from .forms import SubmitQnForm, SubmitAnsForm
 from .models import User, Question, Answer
+from .forms import SubmitQnForm, SubmitAnsForm
+from .filters import QuestionFilter
 
 
 # Set to lower number for development purposes
@@ -138,7 +139,6 @@ def submit_ans(request, qn_id):
 def vote_ans(request, ans_id, vote):
     # Query for answer using ans_id
     ans = Answer.objects.get(pk=ans_id)
-    # Add current User to voted_by field
     
     # Considered: https://stackoverflow.com/questions/2690521/django-check-for-any-exists-for-a-query
     # We need the .all() method: https://stackoverflow.com/questions/17732449/manyrelatedmanager-not-iterable-think-im-trying-to-pull-my-objects-out-incorre
@@ -197,4 +197,28 @@ def view_profile(request, username):
 
     return render(request, "users/profile.html", {
         "user": user
+    })
+
+def search(request):
+    questions = Question.objects.all()
+    # print("IsUserInput", bool(request.GET))
+
+    # Set up filter: We will make GET requests and filter from Questions model
+    qn_filter = QuestionFilter(request.GET, queryset=questions)
+
+    # If user inputted any queries set questions to filter results, else empty list
+    questions = qn_filter.qs if bool(request.GET) else []
+
+    # Order by step is required by Paginator so we order most recent questions first
+    questions = questions.order_by('-datetime_created')
+
+    # Set up pagination
+    qn_paginator = Paginator(questions, ITEMS_PER_PAGE)
+    qn_page_number = request.GET.get('page')
+    page_qns = qn_paginator.get_page(qn_page_number)
+
+    return render(request, 'questions/search.html', {
+        "qn_filter": qn_filter,
+        "questions": questions,
+        "page_qns": page_qns,
     })

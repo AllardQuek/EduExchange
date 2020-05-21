@@ -15,4 +15,5 @@ urlpatterns = [
     path("save/<int:qn_id>", views.save_qn, name="saveqn"),
     path("savedqns", views.view_savedqns, name="viewsavedqns"),
     path("user/<str:username>", views.view_profile, name="viewprofile"),
+    path("search", views.search, name="search"),
 ]
