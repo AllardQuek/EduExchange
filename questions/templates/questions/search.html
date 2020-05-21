@@ -1,0 +1,16 @@
+{% extends 'questions/layout.html' %}
+
+{% block main %}
+    <form method="GET">
+        {{ qn_filter.form.as_p }}
+        <button class="btn btn-success">Search</button>
+    </form>
+    <hr>
+    {% if questions %}
+        {% for qn in questions %}
+            {% include 'common/question.html' %}
+        {% endfor %}
+    {% endif %}
+
+    {% include 'common/pagination.html' with page_obj=page_qns %}
+{% endblock %}

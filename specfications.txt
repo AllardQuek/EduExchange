@@ -1,2 +1,40 @@
+Project Scope:
+1. Submit Qns (text/photo) ✅ 
+- Users who are signed in should be able to write a new text-based post by filling in a text area and then clicking a button to submit the post
+- decide: “New Post” at top of page or separate page
+2. All Qns ✅ 
+- View all posts from all users, with most recent ones first
+3. Pagination ✅
+- Max 10 posts per page, if more “Next” button should appear to take the user to next page of posts (which should be older than current page of posts)
+- If not on first page, “Previous” button should appear
+- Pagination for viewing questions and answers
+4. Answer Qns  ✅
+- When users click on a post, they should see the question and a section below for posting an answer/comment
+5. Upvote/Downvote ✅
+- Users should be able to click a button on any post to toggle vote
+- Using JS, you should asynchronously let the server know to update the vote count (as via a call to fetch) and then update the post’s vote count displayed on the page, without requiring a page reload
+6. Saved Posts ✅
+- Users should be able to click “Save Post” on any post so that they can view these specific posts from a “Saved Posts” navigation link
+7. Search ✅
+- Users should be able to enter keywords to search for relevant questions
+- A paginated list of matching posts should be displayed
+- See all posts filtered by subject/level
+- Similar to “All Posts” but with limited set
+- Available to all users
+8. Profile Page ✅
+- View any user’s profile which contains the number of questions and answer they have submitted
+
+
 Future Work:
+- Split into multiple apps? How to decide?
 - How to remember if user voted and show on icons UI? (similar to saving question)
+
+  Edit Post
+- Users should be able to click an “Edit” button or link on any of their posts
+- When clicked, the content of their post should be replaced with a textarea 
+- User should be able to “Save” the edited post. Using JS, you should be able to achieve this without reloading the page
+- For security, ensure your application is designed such that it is not possible for a user, via any route, to edit another user’s posts
+- Filter particular post, instantiate form with that post, save form data
+  Profile Page
+- description (editable)
+- link to user’s saved posts
