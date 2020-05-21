@@ -50,21 +50,25 @@ display: inline-block;
     /* Upvote */
     color: limegreen;
     padding-bottom: 10px;
-    text-align: left;
-    float: right;
+    padding-top: 15px;
+    /* text-align: left;
+    float: right; */
 }
 
 .fa-arrow-alt-circle-down {
     /* Downvote */
     color: tomato;
-    text-align: left;
-    float: right;
+    /* text-align: left;
+    float: right; */
 }
 
 .icon-label {
     /* Position text on left of icon */
-    text-align: right;
-    float: left;
+    text-align: center;
+    display: inline-block;
+    padding-top: 35px;
+    /* float: middle; */
+    /* vertical-align: middle; */
 }
 
 .card.border-secondary.mb-3  {
@@ -79,7 +83,7 @@ display: inline-block;
 }
 
 .card-subtitle {
-    /* Position additional info at bottom */
+    /* Float h6 with additional info to bottom */
     text-align: left;
     position: absolute;
     bottom: 0;
@@ -88,4 +92,15 @@ display: inline-block;
 .answer-list {
     /* Some separation between each answer item */
     padding-bottom: 10px;
+}
+
+/* https://www.w3schools.com/howto/howto_css_image_responsive.asp */
+.img-responsive {
+    text-align: center; 
+    width: 100%;
+    height: auto;
+    max-width: 400px;     /* NEED for proper size */ 
+    max-height: 400px;
+    display: block;
+    margin: auto;         /* NEED for positioning */
 }

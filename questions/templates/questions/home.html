@@ -34,7 +34,7 @@ Home
           <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
         </div>
         {% if qn.image %}
-        <img style="height: auto; width: 500px; display: block; text-align: center; margin: auto;" src="{{ qn.image.url }}" alt="Card image">
+        <img class="img-responsive " src="{{ qn.image.url }}" alt="Card image">
         {% endif %}
     </div>
     {% endfor %}

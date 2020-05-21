@@ -1,5 +1,6 @@
 {% extends "questions/layout.html" %}
 
+{% load static %}
 
 {% block main %}
 
@@ -10,7 +11,7 @@
       <h6 class="card-subtitle text-muted">Asked by: {{ qn.user }} ({{ qn.datetime_created }})</h6>
     </div>
     {% if qn.image %}
-    <img style="height: auto; width: 500px; display: block; text-align: center; margin: auto;" src="{{ qn.image.url }}" alt="Card image">
+    <img class="img-responsive col-xs-6" src="{{ qn.image.url }}" alt="Card image">
     {% endif %}
 </div>
 
@@ -21,19 +22,21 @@
 
 <h3> <strong>Answers</strong></h3>
 
+{% include 'common/message.html' %}
 
 {% for ans in answers %}
-
 <div class="container answer-list">
 
     <div class="row">
-      <div class="col-1">
-            <label for="up-icon" class="icon-label" id="up-label">1000000</label>
+      <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
+      <div class="col-xs-6 col-lg-1 num-votes">
+            <label for="up-icon" class="icon-label" id="up-label">100000000</label>
+      </div>  
+      <div class="col-xs-6 col-lg-1 votes">
             <i class="fas fa-arrow-alt-circle-up fa-2x" color: limegreen;" id="up-icon"></i>
-
             <i class="fas fa-arrow-alt-circle-down fa-2x" style="color: tomato;" id="down-icon"></i>
       </div>
-      <div class="col-11">
+      <div class="col-xs-12 col-lg-10">
         <div class="card border-secondary mb-3">
             <div class="card-body">
               <p class="card-text">{{ ans.content }}</p>
@@ -60,6 +63,6 @@
     <button type="submit" class="btn btn-primary">Submit Answer</button>
 </form>
 
-
+<script src="{% static 'questions/question.js' %}"></script>
 
 {% endblock %}

@@ -38,3 +38,5 @@
     <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
 </div>
 {% endfor %}
+
+style="height: auto; max-width: 500px; display: block; text-align: center; margin: auto;"

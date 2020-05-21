@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -120,6 +121,7 @@ def submit_ans(request, qn_id):
             ans.user = request.user
             ans.question = Question.objects.get(pk=qn_id)
             ans.save()
+            messages.success(request, "Your answer has been submitted!")
         else:
             print("ERROR ERROR ERROR")
 
