@@ -4,10 +4,8 @@
 
     <h2>Register</h2>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
-
+    {% include 'common/message.html' %}
+        
     <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <div class="form-group">

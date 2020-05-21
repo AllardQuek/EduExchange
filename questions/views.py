@@ -44,11 +44,11 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
+            messages.success(request, f"Welcome {request.user}!")
             return HttpResponseRedirect(reverse("index"))
         else:
-            return render(request, "questions/login.html", {
-                "message": "Invalid username and/or password."
-            })
+            messages.error(request, "Invalid username or password.")
+            return render(request, "questions/login.html")
     else:
         return render(request, "questions/login.html")
 
@@ -65,19 +65,18 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
-            return render(request, "questions/register.html", {
-                "message": "Passwords must match."
-            })
+            messages.error(request, "Passwords do not match!")
+            return render(request, "questions/register.html")
 
         # Attempt to create new user
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
-            return render(request, "questions/register.html", {
-                "message": "Username already taken."
-            })
+            messages.error(request, "Username already taken!")
+            return render(request, "questions/register.html")
         login(request, user)
+        messages.success(request, f"You have successfully registered. Welcome {request.user}!")
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "questions/register.html")
@@ -92,6 +91,7 @@ def submit_qn(request):
             qn = form.save(commit=False)
             qn.user = request.user
             qn.save()
+            messages.success(request, "Your question was submitted!")
 
     # Even if someone makes a GET request, they will also be taken to index route
     return HttpResponseRedirect(reverse(index))
@@ -122,8 +122,9 @@ def submit_ans(request, qn_id):
             ans.question = Question.objects.get(pk=qn_id)
             ans.save()
             messages.success(request, "Your answer has been submitted!")
+        # Not sure if need to handle case where form is invalid
         else:
-            print("ERROR ERROR ERROR")
+            messages.error(request, "Sorry, we couldn't submit your answer.")
 
     # https://stackoverflow.com/questions/13202385/django-reverse-with-arguments-and-keyword-arguments-not-found
     return HttpResponseRedirect(reverse(view_qn, args=(qn_id,)))

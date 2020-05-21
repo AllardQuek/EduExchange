@@ -6,6 +6,8 @@ Home
 {% endblock %}
 
 {% block main %}
+    {% include 'common/message.html' %}
+
     <!-- https://docs.djangoproject.com/en/3.0/topics/forms/ -->
     <!-- https://stackoverflow.com/questions/33763452/applying-css-styles-to-form-items-in-django -->
     <form action="{% url 'submitqn' %}" method="post" enctype="multipart/form-data">
