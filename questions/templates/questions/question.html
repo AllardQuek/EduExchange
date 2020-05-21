@@ -63,48 +63,7 @@
 
 <hr>
 
-<div class="pagination justify-content-center">
-    <ul class="pagination pagination-sm">
-      <!-- Handle previous pages -->
-      {% if page_answers.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page=1">&laquo;</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="?page=1">&laquo;</a>
-      </li>
-      {% endif %}
-
-      {% if page_answers.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_answers.previous_page_number }}">{{ page_answers.previous_page_number }}</a>
-      </li>
-      {% endif %}
-
-      <!-- Current page -->
-      <li class="page-item active">
-        <a class="page-link" href="?page={{ page_answers.number }}">{{ page_answers.number }}</a>
-      </li>
-
-      <!-- Handle next pages -->
-      {% if page_answers.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_answers.next_page_number }}">{{ page_answers.next_page_number }}</a>
-      </li>
-      {% endif %}
-
-      {% if page_answers.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_answers.paginator.num_pages }}">&raquo;</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="?page={{ page_answers.paginator.num_pages }}">&raquo;</a>
-      </li> 
-      {% endif %}
-    </ul>
-  </div>
+{% include 'common/pagination.html' with page_obj=page_answers %}
 
 <script src="{% static 'questions/question.js' %}"></script>
 

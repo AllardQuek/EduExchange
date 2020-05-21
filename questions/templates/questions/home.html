@@ -42,46 +42,7 @@ Home
     {% endfor %}
 
     <!-- https://getbootstrap.com/docs/4.4/components/pagination/#alignment -->
-    <div class="pagination justify-content-center">
-        <ul class="pagination pagination-sm">
-          <!-- Handle previous pages -->
-          {% if questions.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page=1">&laquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="?page=1">&laquo;</a>
-          </li>
-          {% endif %}
-
-          {% if questions.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a>
-          </li>
-          {% endif %}
-
-          <!-- Current page -->
-          <li class="page-item active">
-            <a class="page-link" href="?page={{ questions.number }}">{{ questions.number }}</a>
-          </li>
-
-          <!-- Handle next pages -->
-          {% if questions.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a>
-          </li>
-          {% endif %}
-
-          {% if questions.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ questions.paginator.num_pages }}">&raquo;</a>
-          </li>
-          {% else %}
-          <li class="page-item disabled">
-            <a class="page-link" href="?page={{ questions.paginator.num_pages }}">&raquo;</a>
-          </li> 
-          {% endif %}
-        </ul>
-      </div>
+    <!-- https://stackoverflow.com/questions/42795717/how-to-avoid-repetition-on-templates-in-django -->
+    {% include 'common/pagination.html' with page_obj=questions %}
+    
 {% endblock %}
