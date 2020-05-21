@@ -10,6 +10,7 @@ from django.core.paginator import Paginator
 from .forms import SubmitQnForm, SubmitAnsForm
 from .models import User, Question, Answer
 
+
 # Set to lower number for development purposes
 ITEMS_PER_PAGE = 3
 
@@ -191,10 +192,9 @@ def view_savedqns(request):
         "saved_qns": saved_qns
     })
 
-
 def view_profile(request, username):
-
     user = User.objects.get(username=username)
+
     return render(request, "users/profile.html", {
         "user": user
     })
