@@ -37,6 +37,8 @@ Home
     <!-- https://stackoverflow.com/questions/42795717/how-to-avoid-repetition-on-templates-in-django -->
     {% include 'common/pagination.html' with page_obj=questions %}
 
+{% endblock %}
 
+{% block script %}
     <script src="{% static 'questions/bookmark.js' %}"></script>
 {% endblock %}

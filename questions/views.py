@@ -182,3 +182,11 @@ def save_qn(request, qn_id):
         qn.saved_by.add(request.user)
         return HttpResponse("Saved")
     
+def view_savedqns(request):
+    saved_qns = request.user.savedqns.all()
+    if not saved_qns:
+        messages.warning(request, "You don't have any questions saved yet!")
+        
+    return render(request, "questions/saved_qns.html", {
+        "saved_qns": saved_qns
+    })

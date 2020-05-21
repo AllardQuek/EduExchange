@@ -4,60 +4,62 @@
 {% load mathfilters %}
 
 {% block main %}
+    {% include 'common/question.html' %}
 
-{% include 'common/question.html' %}
+    <br>
+    <i class="fas fa-cog fa-3x fa-spin"></i>
+    <br><br>
 
-<br>
-<i class="fas fa-cog fa-3x fa-spin"></i>
-<br><br>
+    <h3> <strong>Answers</strong></h3>
 
+    {% include 'common/message.html' %}
 
-<h3> <strong>Answers</strong></h3>
+    {% for ans in page_answers %}
+    <div class="container answer-list">
 
-{% include 'common/message.html' %}
+        <div class="row">
+            <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
+            <div class="col-xs-6 col-lg-1 num-votes">
+                <!-- https://stackoverflow.com/questions/9948095/variable-subtraction-in-django-templates/51468222#51468222 -->
+                <label for="up-icon" class="icon-label" id="ans-{{ ans.id }}" data-ansid="{{ ans.id }}">{{ ans.upvoted_by.count|sub:ans.downvoted_by.count }}</label>
+            </div>  
+            <div class="col-xs-6 col-lg-1 votes">
+                <i class="fas fa-arrow-alt-circle-up fa-2x vote-icon" id="up-icon" data-ansid="{{ ans.id }}" data-vote="upvote"></i>
+                <i class="fas fa-arrow-alt-circle-down fa-2x vote-icon" id="down-icon" data-ansid="{{ ans.id }}" data-vote="downvote"></i>
+            </div>
+            <div class="col-xs-12 col-lg-10">
+            <div class="card border-secondary mb-3">
+                <div class="card-body">
+                    <p class="card-text">{{ ans.content }}</p>
+                    <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
 
-{% for ans in page_answers %}
-<div class="container answer-list">
-
-    <div class="row">
-        <!-- https://stackoverflow.com/questions/42054637/webpage-is-not-mobile-friendly-not-responsive -->
-        <div class="col-xs-6 col-lg-1 num-votes">
-            <!-- https://stackoverflow.com/questions/9948095/variable-subtraction-in-django-templates/51468222#51468222 -->
-            <label for="up-icon" class="icon-label" id="ans-{{ ans.id }}" data-ansid="{{ ans.id }}">{{ ans.upvoted_by.count|sub:ans.downvoted_by.count }}</label>
-        </div>  
-        <div class="col-xs-6 col-lg-1 votes">
-            <i class="fas fa-arrow-alt-circle-up fa-2x vote-icon" id="up-icon" data-ansid="{{ ans.id }}" data-vote="upvote"></i>
-            <i class="fas fa-arrow-alt-circle-down fa-2x vote-icon" id="down-icon" data-ansid="{{ ans.id }}" data-vote="downvote"></i>
-        </div>
-        <div class="col-xs-12 col-lg-10">
-        <div class="card border-secondary mb-3">
-            <div class="card-body">
-                <p class="card-text">{{ ans.content }}</p>
-                <h6 class="card-subtitle mb-2 text-muted">Answered by: {{ ans.user }} ({{ ans.datetime_created }})</h6>
-
+                </div>
+            </div>
             </div>
         </div>
         </div>
-    </div>
-    </div>
-{% endfor %}
-
-<hr>
-
-<form action="{% url 'submitans' qn.id %}" method="post">
-    {% csrf_token %}
-    {% for field in ansform %}
-    <div class="form-group">
-        Answer: {{ field }}
-    </div>
     {% endfor %}
-    <button type="submit" class="btn btn-primary">Submit Answer</button>
-</form>
 
-<hr>
+    <hr>
 
-{% include 'common/pagination.html' with page_obj=page_answers %}
+    <form action="{% url 'submitans' qn.id %}" method="post">
+        {% csrf_token %}
+        {% for field in ansform %}
+        <div class="form-group">
+            Answer: {{ field }}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit Answer</button>
+    </form>
 
-<script src="{% static 'questions/vote.js' %}"></script>
-<script src="{% static 'quetions/bookmark.js' %}"></script>
+    <hr>
+
+    {% include 'common/pagination.html' with page_obj=page_answers %}
+
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'questions/vote.js' %}"></script>
+    <script src="{% static 'questions/bookmark.js' %}"></script>
 {% endblock %}

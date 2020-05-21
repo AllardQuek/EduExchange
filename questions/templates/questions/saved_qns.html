@@ -1,0 +1,16 @@
+{% extends "questions/layout.html" %}
+
+{% load static %}
+
+{% block main %}
+    {% include 'common/message.html' %}
+    
+    {% for qn in saved_qns %}
+        {% include 'common/question.html' %}
+    {% endfor %}
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'questions/bookmark.js' %}"></script>
+{% endblock %}

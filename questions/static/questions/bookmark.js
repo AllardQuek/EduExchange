@@ -12,7 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function saveQn(icon) {
-    fetch(`save/${icon.dataset.qnid}`)
+    // NOTE: fetch url will be relative if you don't start with forward slash
+    // Start with '/' for absolute path: https://stackoverflow.com/questions/52260498/relative-path-being-added-to-fetch-request
+    fetch(`/save/${icon.dataset.qnid}`)
     .then(response => response.text())
     .then(text => {
         console.log(text);
