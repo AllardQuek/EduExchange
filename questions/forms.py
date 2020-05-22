@@ -16,8 +16,8 @@ class SubmitQnForm(ModelForm):
         ]
         widgets = {
             # https://stackoverflow.com/questions/9323886/increase-charfield-width-in-django-forms
-            'title': TextInput(attrs={'size': 50}), 
-            'content': Textarea(attrs={'cols':80, 'rows':10, 'class': 'form-control'}),
+            'title': TextInput(attrs={'class': 'form-control'}), 
+            'content': Textarea(attrs={'rows':10, 'class': 'form-control'}),
             
         }
 
@@ -28,5 +28,5 @@ class SubmitAnsForm(ModelForm):
             'content',
         ]
         widgets = {
-            'content': Textarea(attrs={'cols':70, 'rows':3, 'class': 'form-control'}),
+            'content': Textarea(attrs={'rows':3, 'class': 'form-control'}),
         }
