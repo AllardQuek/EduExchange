@@ -30,6 +30,8 @@ Future Work:
 - Split into multiple apps? How to decide?
 - How to remember if user voted and show on icons UI? (similar to saving question)
 - Write Tests
+- Integrate React for frontend
+- Use Docker containers, cloud storage for images and db, deploy using AWS/Google Cloud
 
   Edit Post
 - Users should be able to click an “Edit” button or link on any of their posts
