@@ -32,6 +32,7 @@ Future Work:
 - Write Tests
 - Integrate React for frontend
 - Use Docker containers, cloud storage for images and db, deploy using AWS/Google Cloud
+- Define functions for models (e.g. to get difference between up/down votes, use question.net_votes)
 
   Edit Post
 - Users should be able to click an “Edit” button or link on any of their posts
