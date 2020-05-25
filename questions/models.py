@@ -24,7 +24,7 @@ class Level(models.Model):
 class Question(models.Model):
     title = models.CharField(max_length=128, null=True)
     content = models.CharField(max_length=2000) # ~350-400 words
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, upload_to='images')     # upload_to specifies which folder in media folder to save file to
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="userqns")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name="subjectqns")
     level = models.ForeignKey(Level, on_delete=models.CASCADE, related_name="lvlqns")
