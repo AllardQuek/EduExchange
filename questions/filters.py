@@ -10,7 +10,7 @@ class QuestionFilter(django_filters.FilterSet):
 
         # Fields is a dictionary of model_field:lookup_expression
         fields = {
-            'title': ['contains'],
+            'title': ['icontains'],
             'content': ['icontains'],
             'subject': ['exact'],
             'level': ['exact'],
