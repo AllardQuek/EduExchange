@@ -33,6 +33,7 @@ Future Work:
 - Integrate React for frontend
 - Use Docker containers, cloud storage for images and db, deploy using AWS/Google Cloud
 - Define functions for models (e.g. to get difference between up/down votes, use question.net_votes)
+- Notifcations when tagged, replied
 
   Edit Post
 - Users should be able to click an “Edit” button or link on any of their posts
@@ -44,3 +45,8 @@ Future Work:
   Profile Page
 - description (editable)
 - link to user’s saved posts
+- profile picture
+
+  Gamification
+- Points and levels for contributions
+- Progress bar and badges/achievements
