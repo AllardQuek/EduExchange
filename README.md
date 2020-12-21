@@ -1,6 +1,6 @@
 # EduExchange
 
-Django web-application for students to post questions, submit answers and build an active community whose members can share resources freely.
+Django web-application for students to post questions, submit answers and build an active community whose members can share resources freely. Check it out [here!](https://eduexchange-aq.herokuapp.com/)
 
 ## What's inside?
 
